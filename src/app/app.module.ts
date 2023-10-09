@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TopNavComponent } from './top-nav/top-nav.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    TopNavComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
