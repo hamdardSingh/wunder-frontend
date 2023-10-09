@@ -1,4 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'scss/fonts';
+@import 'scss/variables';
+@import '@angular/material/theming';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: $wm-black;
+    font-family: Averta PE, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+}
+
+$wm-primary: mat-palette($wm-blue, 900);
+$wm-accent: mat-palette($wm-blue, A700);
+$wm-warn: mat-palette($wm-red, 900);
+$wunder-theme: mat-light-theme($wm-primary, $wm-accent, $wm-warn );
+
+@include angular-material-theme($wunder-theme);
