@@ -1,0 +1,27 @@
+.flex{
+    display: flex;
+    gap: 1rem;
+    &.col{ 
+        flex-direction: column;
+    }
+
+    &.end{
+        justify-content: flex-end;
+    }
+
+    &.between{
+        justify-content: space-between;
+    }
+}
+
+.flex-50{
+    flex-basis: 50%;
+}
+
+.flex-20{
+    flex-basis: 20%;
+}
+
+.flex-80{
+    flex-basis: 80%;
+}

@@ -1,11 +1,13 @@
-.header{
+.header {
     min-height: 80vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 1.75rem;
     max-width: 800px;
-    .title{
+    padding-bottom: 1.75rem;
+
+    .title {
         display: flex;
         flex-direction: column;
         gap: 1.75rem;
