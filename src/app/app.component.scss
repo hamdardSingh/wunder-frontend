@@ -1,0 +1,15 @@
+.header{
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.75rem;
+    max-width: 800px;
+    .title{
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+        text-align: center;
+        margin-top: auto;
+    }
+}

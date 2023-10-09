@@ -1,5 +1,6 @@
 @import 'scss/fonts';
 @import 'scss/variables';
+@import 'scss/reset';
 @import '@angular/material/theming';
 
 html,
@@ -20,6 +21,17 @@ body {
     height: 100%;
     max-width: 70rem;
     margin: 0 auto;
+}
+
+.section-highlight{
+    background-color: $wm-light-green;
+}
+
+h1{
+    color: $wm-black;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1.1;
 }
 
 $wm-primary: mat-palette($wm-blue, 900);
