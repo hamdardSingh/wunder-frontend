@@ -1,0 +1,12 @@
+form{
+    padding-top: 1rem;
+    mat-form-field{
+        width: 100%;
+    }
+}
+
+::ng-deep{
+    .cdk-visually-hidden{
+        display: none;
+       }
+}
