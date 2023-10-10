@@ -67,7 +67,7 @@
             </mat-form-field>
             <div class="flex between">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-flat-button color="primary" [disabled]="paymentFormGroup.invalid || isLoading" (click)="saveForm()">
+                <button mat-flat-button color="primary" [disabled]="paymentFormGroup.invalid || personalFormGroup.invalid || addressFormGroup.invalid || isLoading" (click)="saveForm()">
                     <ng-container *ngIf="!isLoading">Create Account</ng-container>
                     <mat-spinner *ngIf="isLoading" diameter=20 strokeWidth="1"></mat-spinner> 
                 </button>
