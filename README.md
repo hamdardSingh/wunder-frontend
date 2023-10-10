@@ -6,22 +6,35 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Technologies used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - Angular
+ - ngrx/store
+ - RxJs
 
-## Build
+## Areas for Improvement
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Angular
+  - Utilize lazy loading modules/components to decrease the main bundle size.
+  - Implement the OnPush change detection strategy for enhanced performance.
+  - Leverage Angular Signals to optimize rendering updates.
 
-## Running unit tests
+#### SCSS
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+There are several areas for improvement to align with the brand identity. Currently, only the main colors have been defined.
+ 
+ - Define the complete color palette to adhere to brand guidelines.
+ - Implement Mixins to reduce redundant code.
+ - Consider optimization for mobile devices.
 
-## Running end-to-end tests
+### Problem Faced
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Storing the state in the local storage because I have never used that feature of ngRx before. And copying API endpoint links from the PDF file ;)
 
-## Further help
+### Project Structure
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+I followed the standard Angular project structure. Here are some key points:
+
+- The API service file is located in the main `src/app` directory.
+- Form state management is handled in the `src/app/form/state` directory.
+- I utilized a proxy configuration file at `src/proxy.conf.json`.
