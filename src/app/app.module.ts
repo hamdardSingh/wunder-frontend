@@ -8,6 +8,7 @@ import { FormComponent } from './form/form.component';
 import { StoreModule } from '@ngrx/store';
 import { formReducer } from './form/state/form.reducer';
 import { localStorageMetaReducer } from './form/state/localstorage.reducer';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { localStorageMetaReducer } from './form/state/localstorage.reducer';
     BrowserAnimationsModule,
     TopNavComponent,
     FormComponent,
+    HttpClientModule,
     StoreModule.forRoot({formdata: formReducer}, { metaReducers: [localStorageMetaReducer] })
   ],
   providers: [],

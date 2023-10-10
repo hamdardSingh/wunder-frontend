@@ -7,10 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, first, tap } from 'rxjs';
+import { Observable, Subscription, finalize, first, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormFields, FormState } from './state/form.state';
-import { EditForm, NavigateForm } from './state/form.actions';
+import { EditForm, NavigateForm, Reset } from './state/form.actions';
+import { ApiService } from '../api.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-form',
@@ -24,10 +26,12 @@ import { EditForm, NavigateForm } from './state/form.actions';
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  standalone: true
+  standalone: true,
 })
 export class FormComponent implements OnInit, OnDestroy {
 
@@ -52,14 +56,16 @@ export class FormComponent implements OnInit, OnDestroy {
   formData = this._fb.group({
     personal: this.personalFormGroup,
     address: this.addressFormGroup,
-    patyment: this.paymentFormGroup
+    payment: this.paymentFormGroup
   });
 
   formData$: Observable<FormState>;
   subscriptions: Subscription = new Subscription();
-  slectectedStep: number = 0;
+  slectectedStep = 0;
+  isLoading = false;
+  paymentId: string | null = null;
 
-  constructor(private _fb: FormBuilder, private store: Store<{ formdata: FormState }>) {
+  constructor(private _fb: FormBuilder, private store: Store<{ formdata: FormState }>, private apiService: ApiService) {
     this.formData$ = this.store.select('formdata');
   }
 
@@ -94,6 +100,19 @@ export class FormComponent implements OnInit, OnDestroy {
   onStepChange(index: number): void {
     this.store.dispatch(EditForm({ formfields: this.formData.value as FormFields }));
     this.store.dispatch(NavigateForm({ step: index }));
+  }
+
+  saveForm() {
+    this.isLoading = true;
+    this.subscriptions.add(
+      this.apiService.saveForm(this.formData.value as FormFields)
+        .pipe(finalize(() => this.isLoading = false))
+        .pipe(tap((data) => {
+          this.paymentId = data.paymentDataId;
+          this.store.dispatch(Reset());
+        }))
+        .subscribe()
+    )
   }
 
   ngOnDestroy(): void {

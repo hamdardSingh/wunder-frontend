@@ -1,74 +1,98 @@
-<mat-stepper #stepper [disableRipple]="true" (selectedIndexChange)="onStepChange($event)" [selectedIndex]=slectectedStep>
-    <mat-step [stepControl]="personalFormGroup">
-        <form [formGroup]="personalFormGroup">
-            <ng-template matStepLabel>Personal info</ng-template>
-            <div class="flex">
-                <mat-form-field  appearance="outline" floatLabel="always" class="flex-50">
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstname">
-                </mat-form-field>
-                <mat-form-field  appearance="outline" floatLabel="always" class="flex-50">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastname">
-                </mat-form-field>
-            </div>
+<ng-container *ngIf="paymentId === null; else success">
+    <mat-stepper #stepper [disableRipple]="true" (selectedIndexChange)="onStepChange($event)"
+        [selectedIndex]=slectectedStep>
+        <mat-step [stepControl]="personalFormGroup">
+            <form [formGroup]="personalFormGroup">
+                <ng-template matStepLabel>Personal info</ng-template>
+                <div class="flex">
+                    <mat-form-field appearance="outline" floatLabel="always" class="flex-50">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstname">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" floatLabel="always" class="flex-50">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastname">
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field  appearance="outline" floatLabel="always">
-                <mat-label>Phone</mat-label>
-                <input matInput formControlName="phone">
-            </mat-form-field>
-            
-            <div class="flex end">
-                <button mat-flat-button matStepperNext color="primary">Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="addressFormGroup">
-        <form [formGroup]="addressFormGroup">
-            <ng-template matStepLabel>Address info</ng-template>
-            <div class="flex">
-                <mat-form-field appearance="outline" floatLabel="always" class="flex-80">
-                    <mat-label>Street</mat-label>
-                    <input matInput formControlName="street">
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone">
                 </mat-form-field>
-                <mat-form-field appearance="outline" floatLabel="always" class="flex-20">
-                    <mat-label>House No.</mat-label>
-                    <input matInput formControlName="number">
-                </mat-form-field>
-            </div>
-            <div class="flex">
-                <mat-form-field appearance="outline" floatLabel="always" class="flex-20">
-                    <mat-label>Zip</mat-label>
-                    <input matInput formControlName="zip">
-                </mat-form-field>
-                <mat-form-field appearance="outline" floatLabel="always" class="flex-80">
-                    <mat-label>City</mat-label>
-                    <input matInput formControlName="city">
-                </mat-form-field>
-            </div>
-            
-            <div class="flex between">
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-flat-button matStepperNext  color="primary">Next</button>
-            </div>
-        </form>
-    </mat-step>
 
-    <mat-step [stepControl]="paymentFormGroup">
-        <form [formGroup]="paymentFormGroup">
-            <ng-template matStepLabel>Payment info</ng-template>
-            <mat-form-field appearance="outline" floatLabel="always" class="flex-20">
-                <mat-label>Account Name</mat-label>
-                <input matInput formControlName="name">
-            </mat-form-field>
-            <mat-form-field appearance="outline" floatLabel="always" class="flex-80">
-                <mat-label>IBAN</mat-label>
-                <input matInput formControlName="iban">
-            </mat-form-field>
-            <div class="flex between">
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-flat-button color="primary">Create Account</button>
+                <div class="flex end">
+                    <button mat-flat-button matStepperNext [disabled]="personalFormGroup.invalid"
+                        color="primary">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="addressFormGroup">
+            <form [formGroup]="addressFormGroup">
+                <ng-template matStepLabel>Address info</ng-template>
+                <div class="flex">
+                    <mat-form-field appearance="outline" floatLabel="always" class="flex-80">
+                        <mat-label>Street</mat-label>
+                        <input matInput formControlName="street">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" floatLabel="always" class="flex-20">
+                        <mat-label>House No.</mat-label>
+                        <input matInput formControlName="number">
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field appearance="outline" floatLabel="always" class="flex-20">
+                        <mat-label>Zip</mat-label>
+                        <input matInput formControlName="zip">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" floatLabel="always" class="flex-80">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="city">
+                    </mat-form-field>
+                </div>
+
+                <div class="flex between">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-flat-button matStepperNext [disabled]="addressFormGroup.invalid"
+                        color="primary">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="paymentFormGroup">
+            <form [formGroup]="paymentFormGroup">
+                <ng-template matStepLabel>Payment info</ng-template>
+                <mat-form-field appearance="outline" floatLabel="always" class="flex-20">
+                    <mat-label>Account Name</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always" class="flex-80">
+                    <mat-label>IBAN</mat-label>
+                    <input matInput formControlName="iban">
+                </mat-form-field>
+                <div class="flex between">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-flat-button color="primary"
+                        [disabled]="paymentFormGroup.invalid || personalFormGroup.invalid || addressFormGroup.invalid || isLoading"
+                        (click)="saveForm()">
+                        <ng-container *ngIf="!isLoading">Create Account</ng-container>
+                        <mat-spinner *ngIf="isLoading" diameter=20 strokeWidth="1"></mat-spinner>
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-stepper>
+</ng-container>
+
+<ng-template #success>
+    <mat-card>
+        <mat-card-content>
+            <div class="flex center col success-block">
+                <mat-icon class="success-icon">check_circle</mat-icon>
+                <p>Account created successfully. Please note your payment ID for your reference.</p>
+                <p>
+                    PAYMENT ID: <strong>{{paymentId}}</strong>
+                </p>
             </div>
-        </form>
-    </mat-step>
-</mat-stepper>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
