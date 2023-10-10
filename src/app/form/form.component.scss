@@ -1,3 +1,4 @@
+@import '../../scss/variables';
 form{
     padding-top: 1rem;
     mat-form-field{
@@ -9,4 +10,20 @@ form{
     .cdk-visually-hidden{
         display: none;
        }
+}
+
+.success-block{
+    padding: 2rem 0;
+    text-align: center;
+    p{
+        word-wrap: break-word;
+    }
+}
+.success-icon{
+    font-size: 5rem;
+    color: $wm-dark-green;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-self: center;
 }

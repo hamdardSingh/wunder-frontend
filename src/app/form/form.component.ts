@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormFields, FormState } from './state/form.state';
 import { EditForm, NavigateForm, Reset } from './state/form.actions';
 import { ApiService } from '../api.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-form',
@@ -26,10 +27,11 @@ import { ApiService } from '../api.service';
     MatInputModule,
     MatStepperModule,
     MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  standalone: true
+  standalone: true,
 })
 export class FormComponent implements OnInit, OnDestroy {
 
