@@ -18,5 +18,5 @@ export const formReducer = createReducer(
         ...state,
         step
     })),
-    on(Reset, () => defaultFromState)
+    on(Reset, () => ({} as FormState))
 )
