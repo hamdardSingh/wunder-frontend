@@ -1,15 +1,21 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatStepper, MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormFields, FormState } from './state/form.state';
+import { EditForm, NavigateForm } from './state/form.actions';
 
 @Component({
   selector: 'app-form',
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
@@ -23,26 +29,45 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
   styleUrls: ['./form.component.scss'],
   standalone: true
 })
-export class FormComponent implements AfterViewInit {
-  @ViewChild('stepper') stepper: MatStepper = {} as MatStepper;
+export class FormComponent implements OnInit {
+
   personalFormGroup = this._fb.group({
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
     phone: ['', Validators.required]
   });
+
   addressFormGroup = this._fb.group({
     street: ['', Validators.required],
     number: ['', Validators.required],
     zip: ['', Validators.required],
     city: ['', Validators.required],
   });
+
   paymentFormGroup = this._fb.group({
     name: ['', Validators.required],
     iban: ['', Validators.required],
   });
-  constructor(private _fb: FormBuilder) { }
 
-  ngAfterViewInit(): void {
-    // this.stepper.selectedIndex = 0; 
+  formData = this._fb.group({
+    personal: this.personalFormGroup,
+    address: this.addressFormGroup,
+    patyment: this.paymentFormGroup
+  })
+
+  formData$: Observable<FormState>
+
+  constructor(private _fb: FormBuilder, private store: Store<{ formdata: FormState }>) {
+    this.formData$ = this.store.select('formdata')
   }
+
+  ngOnInit(): void {
+  
+  }
+
+  onStepChange(index: number): void {
+    this.store.dispatch(EditForm({ formfields: this.formData.value as FormFields }))
+    this.store.dispatch(NavigateForm({ step: index }));
+  }
+
 }

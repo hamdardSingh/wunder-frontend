@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { FormComponent } from './form/form.component';
+import { StoreModule } from '@ngrx/store';
+import { formReducer } from './form/state/form.reducer';
+import { localStorageMetaReducer } from './form/state/localstorage.reducer';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,8 @@ import { FormComponent } from './form/form.component';
     BrowserModule,
     BrowserAnimationsModule,
     TopNavComponent,
-    FormComponent
+    FormComponent,
+    StoreModule.forRoot({formdata: formReducer}, { metaReducers: [localStorageMetaReducer] })
   ],
   providers: [],
   bootstrap: [AppComponent]

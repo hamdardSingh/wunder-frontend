@@ -1,4 +1,5 @@
-<mat-stepper linear #stepper>
+{{formData$ | async | json }}
+<mat-stepper linear #stepper [disableRipple]="true" (selectedIndexChange)="onStepChange($event)">
     <mat-step [stepControl]="personalFormGroup">
         <form [formGroup]="personalFormGroup">
             <ng-template matStepLabel>Personal info</ng-template>
