@@ -1,4 +1,4 @@
-<mat-stepper linear #stepper>
+<mat-stepper #stepper [disableRipple]="true" (selectedIndexChange)="onStepChange($event)" [selectedIndex]=slectectedStep>
     <mat-step [stepControl]="personalFormGroup">
         <form [formGroup]="personalFormGroup">
             <ng-template matStepLabel>Personal info</ng-template>
